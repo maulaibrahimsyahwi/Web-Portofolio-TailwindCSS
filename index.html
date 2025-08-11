@@ -1,425 +1,676 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="Web portofolio tailwind" />
-    <meta name="keyword" content="tailwindcss, CSS, tailwind" />
-    <meta name="author" content="codepolitan" />
-    <title>Web Portofolio</title>
-    <link rel="stylesheet" type="text/css" href="output.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maula Ibrahim Syahwi | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
-      .gradient {
-        background-image: linear-gradient(to bottom right, #4c51bf, #702459);
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+      * {
+        font-family: "Inter", sans-serif;
       }
-      .gradient-skill {
-        background-image: linear-gradient(#fc8181, #fed7d7);
+
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       }
-      .gradient-bottom {
-        background-image: linear-gradient(#4c51bf, #702459);
+
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .glass {
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.125);
+      }
+
+      .floating {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+
+      .fade-in.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .skill-bar {
+        width: 0%;
+        transition: width 2s ease-in-out;
+      }
+
+      .skill-bar.animate {
+        width: var(--width);
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .typing::after {
+        content: "|";
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: particle-float 15s infinite linear;
+      }
+
+      @keyframes particle-float {
+        0% {
+          transform: translateY(100vh) translateX(-50px);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(50px);
+          opacity: 0;
+        }
       }
     </style>
   </head>
-  <body>
-    <!--section navbar-->
-    <section class="w-screen mx-auto px-4">
-      <nav class="flex flex-wrap p-6 justify-between">
-        <!-- Logo -->
-        <div class="flex flex-shrink-0 mr-6">
-          <img src="https://placehold.co/200x200.png" class="h-10 w-50 mr-2" />
-        </div>
-
-        <!-- Menu -->
-        <div class="block lg:hidden">
-          <a
-            class="flex items-center px-3 py-2 rounded border border-indigo-400 text-indigo-500 hover:text-indigo-700 hover:border-indigo-700"
-          >
-            <svg
-              class="fill-current h-3 w-3"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 w-full z-50 transition-all duration-300"
+      id="navbar"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex-shrink-0">
+            <span class="text-2xl font-extrabold text-[#414558]"
+              >Portofolio</span
             >
-              <title>Menu</title>
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-            </svg>
+          </div>
+
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-8">
+              <a
+                href="#home"
+                class="nav-link text-white-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors"
+                >Home</a
+              >
+              <a
+                href="#about"
+                class="nav-link text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors"
+                >About</a
+              >
+              <a
+                href="#skills"
+                class="nav-link text-white-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors"
+                >Skills</a
+              >
+              <a
+                href="#portfolio"
+                class="nav-link text-white-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors"
+                >Portfolio</a
+              >
+              <a
+                href="#contact"
+                class="nav-link text-white-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors"
+                >Contact</a
+              >
+            </div>
+          </div>
+
+          <div class="md:hidden">
+            <button
+              id="mobile-menu-button"
+              class="text-gray-700 hover:text-indigo-600"
+            >
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="md:hidden hidden glass">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a
+            href="#home"
+            class="block px-3 py-2 text-gray-700 hover:text-indigo-600"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="block px-3 py-2 text-gray-700 hover:text-indigo-600"
+            >About</a
+          >
+          <a
+            href="#skills"
+            class="block px-3 py-2 text-gray-700 hover:text-indigo-600"
+            >Skills</a
+          >
+          <a
+            href="#portfolio"
+            class="block px-3 py-2 text-gray-700 hover:text-indigo-600"
+            >Portfolio</a
+          >
+          <a
+            href="#contact"
+            class="block px-3 py-2 text-gray-700 hover:text-indigo-600"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="min-h-screen gradient-bg flex items-center justify-center relative overflow-hidden"
+    >
+      <div class="particles"></div>
+      <div class="text-center text-white z-10 px-4">
+        <div class="floating">
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
+            class="w-32 h-32 rounded-full mx-auto mb-8 border-4 border-white shadow-2xl object-cover"
+            alt="Profile"
+          />
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold mb-4 fade-in">
+          Hai, Saya <span class="typing">Maula Ibrahim Syahwi</span>
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 opacity-90 fade-in">
+          Programmer & Informatics Student
+        </p>
+        <div class="fade-in">
+          <a
+            href="#about"
+            class="bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-flex items-center"
+          >
+            Pelajari Lebih Lanjut
+            <i class="fas fa-arrow-down ml-2"></i>
           </a>
         </div>
-        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-          <div class="text-sm lg:flex-grow">
-            <a
-              href="#about"
-              class="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-900 text-lg mr-4"
-            >
-              About me
-            </a>
-            <a
-              href="#skill"
-              class="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-900 text-lg mr-4"
-            >
-              Skill Framework
-            </a>
-            <a
-              href="#recent"
-              class="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-900 text-lg mr-4"
-            >
-              Recent Work
-            </a>
-
-            <a
-              href="#contact"
-              class="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-900 text-lg mr-4"
-            >
-              Contact me
-            </a>
-          </div>
-          <div>
-            <a
-              href="#contact"
-              class="inline-block text-sm px-4 py-2 rounded text-gray-600 border border-gray-600 hover:border-transpaent hover:text-white hover:bg-indigo-700 mt-4 lg:mt-0"
-            >
-              Contact me
-            </a>
-          </div>
-        </div>
-      </nav>
+      </div>
     </section>
-    <!-- end navbar -->
 
-    <!-- section about -->
-    <section id="about" class="w-screen mx-auto py-4 gradient">
-      <!-- sambutan -->
-      <div class="px-16 py-8 text-center text-white">
-        <h1 class="w-full text-5xl font-bold">About me</h1>
-        <div class="mb-4">
-          <div
-            class="bg-pink-500 w-2/3 md:w-1/6 opacity-75 rounded h-1 mx-auto"
-          ></div>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 fade-in">
+            Tentang Saya
+          </h2>
+          <div class="w-24 h-1 bg-indigo-600 mx-auto fade-in"></div>
         </div>
-        <h2 class="text-3xl font-bold mb-2">
-          Hai, Saya Maula Ibrahim Syahwi. Senang berjumpa dengan Anda.
-        </h2>
-        <h3 class="text-lg mb-2">
-          Saya seorang programmer dan juga analis, selain dapat membuat aplikasi
-          menggunakan bahasa pemrograman, Saya juga bisa merancang suatu sistem
-          yang dibutuhkan user.
-        </h3>
-        <div class="w-full">
-          <div class="px-4 py-4">
-            <!-- source image baby.jpg didownload dari situs unsplash.com, koleksi Troy T - @ttcollect -->
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="fade-in">
             <img
-              src="https://placehold.co/800x800.png"
-              class="shadow-lg rounded-full max-w-full mx-auto text-center w-48"
+              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=600&fit=crop"
+              class="rounded-2xl shadow-2xl"
+              alt="About"
             />
           </div>
-        </div>
-      </div>
-      <!-- box portofolio -->
-      <div
-        class="grid grid-cols-1 md:grid-cols-3 bg-white py-4 px-4 md:py-8 md:px-8 m-16 rounded-lg"
-      >
-        <!-- box pertama -->
-        <div class="max-w-sm shadow-lg px-4 py-4 bg-white m-3 text-center">
-          <i class="fas fa-laptop-code text-blue-500 fa-5x mb-6"></i>
-          <div class="p-4">
-            <p class="font-bold text-lg md:text-xl mb-6">Programming</p>
-            <p class="text-gray-600 text-base mb-2">JavaScript</p>
-            <hr class="text-gray-600 mb-2" />
-            <p class="text-gray-600 text-base mb-2">JSX</p>
-            <hr class="text-gray-600 mb-2" />
-            <p class="text-gray-600 text-base mb-2">React</p>
-            <hr class="text-gray-600 mb-2" />
-            <br />
-            <br />
-          </div>
-          <div class="px-2 py-4">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 shadow-md rounded-tl-lg rounded-br-lg"
-            >
-              Lihat Portofolio
-            </button>
-          </div>
-        </div>
+          <div class="fade-in">
+            <h3 class="text-3xl font-bold text-gray-900 mb-6">
+              Passion untuk Teknologi
+            </h3>
+            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+              Saya adalah seorang programmer dan Informatics Student yang
+              berpengalaman dengan passion yang mendalam untuk teknologi modern.
+              Dengan keahlian dalam pengembangan web, saya selalu berusaha
+              menciptakan solusi yang inovatif dan efisien.
+            </p>
+            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+              Setiap proyek adalah kesempatan untuk belajar dan berkembang,
+              menciptakan pengalaman digital yang luar biasa untuk pengguna.
+            </p>
 
-        <!-- box kedua -->
-        <div class="max-w-sm shadow-lg px-4 py-4 bg-white m-3 text-center">
-          <i class="fas fa-pencil-ruler text-red-500 fa-5x mb-6"></i>
-          <div class="p-4">
-            <p class="font-bold text-lg md:text-xl mb-6">Design</p>
-            <p class="text-gray-600 text-base mb-2">CSS</p>
-            <hr class="text-gray-600 mb-2" />
-            <p class="text-gray-600 text-base mb-2">Logo</p>
-            <hr class="text-gray-600 mb-2" />
-            <p class="text-gray-600 text-base mb-2">Mobile</p>
-            <hr class="text-gray-600 mb-2" />
-            <p class="text-gray-600 text-base mb-2">UI</p>
-            <hr class="text-gray-600 mb-2" />
-          </div>
-          <div class="px-2 py-4">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 shadow-md rounded-tl-lg rounded-br-lg"
-            >
-              Lihat Portofolio
-            </button>
-          </div>
-        </div>
-
-        <!-- box ketiga -->
-        <div class="max-w-sm shadow-lg px-4 py-4 bg-white m-3 text-center">
-          <i class="fas fa-database text-green-500 fa-5x mb-6"></i>
-          <div class="p-4">
-            <p class="font-bold text-lg md:text-xl mb-6">Database</p>
-            <p class="text-gray-600 text-base mb-2">MySQL</p>
-            <hr class="text-gray-600 mb-2" />
-            <p class="text-gray-600 text-base mb-2">SQL Server</p>
-            <hr class="text-gray-600 mb-2" />
-            <p class="text-gray-600 text-base mb-2">Oracle</p>
-            <hr class="text-gray-600 mb-2" />
-            <p class="text-gray-600 text-base mb-2">PostgreSQL</p>
-            <hr class="text-gray-600 mb-2" />
-          </div>
-          <div class="px-2 py-4">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 shadow-md rounded-tl-lg rounded-br-lg"
-            >
-              Lihat Portofolio
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- end about me -->
-
-    <!-- section skill framework -->
-    <section id="skill" class="container mx-auto py-4 bg-white px-4">
-      <div class="flex flex-wrap">
-        <!-- box pertama menampilkan gambar -->
-        <div class="w-full md:w-4/12 ml-auto mr-auto px-4 mt-20">
-          <!-- source img4.jpg didownload dari situs unsplash.com, Jess Bailey - @jessbailey-->
-          <img src="img/skill.png" class="max-w-full rounded-lg shadow-lg" />
-        </div>
-
-        <!-- box kedua menampilkan skill framework -->
-        <div class="w-full md:w-5/12 ml-auto mr-auto px-4">
-          <div class="md:pr-12">
-            <h1
-              class="w-full my-2 text-5xl font-bold text-center text-gray-700"
-            >
-              Skill Framework
-            </h1>
-            <div class="mb-4">
-              <div
-                class="h-1 bg-pink-500 w-2/3 opacity-75 my-0 mx-0 rounded"
-              ></div>
+            <div class="grid grid-cols-2 gap-6">
+              <div class="text-center">
+                <div class="text-3xl font-bold text-indigo-600">50+</div>
+                <div class="text-gray-600">Projects</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-indigo-600">3+</div>
+                <div class="text-gray-600">Years Experience</div>
+              </div>
             </div>
-            <p class="mt-4 text-lg text-gray-600">
-              Berikut adalah item dan skala keahlian untuk framework :
-            </p>
-            <ul class="list-none mt-4">
-              <li class="grid grid-cols-2 py-2">
-                <p class="text-lg text-gray-600">React</p>
-                <div class="gradient-skill w-7/8"></div>
-              </li>
-              <li class="grid grid-cols-2 py-2">
-                <p class="text-lg text-gray-600">Tailwindcss</p>
-                <div class="gradient-skill w-3/4"></div>
-              </li>
-              <li class="grid grid-cols-2 py-2">
-                <p class="text-lg text-gray-600">Bootstrap</p>
-                <div class="gradient-skill w-2/3"></div>
-              </li>
-              <li class="grid grid-cols-2 py-2">
-                <p class="text-lg text-gray-600">Next.js</p>
-                <div class="gradient-skill w-1/2"></div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- end skill framework -->
-
-    <!-- section my recent work -->
-    <section id="recent" class="container mx-auto py-8 px-4 bg-white">
-      <h2 class="text-3xl font-semibold text-center mb-6">My Recent Work</h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div
-          class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
-        >
-          <img
-            src="https://placehold.co/400"
-            alt="Work 1"
-            class="w-full h-48 object-cover"
-          />
-          <div class="p-4 flex flex-col flex-grow">
-            <h3 class="text-lg font-semibold mb-2">Project 1</h3>
-            <p class="text-gray-600 text-sm mb-4 flex-grow">
-              Deskripsi singkat project 1. Menjelaskan fitur atau tujuan utama
-              dari project ini secara ringkas.
-            </p>
-            <button
-              class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-tr-lg rounded-bl-lg"
-            >
-              View Detail
-            </button>
-          </div>
-        </div>
-
-        <div
-          class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
-        >
-          <img
-            src="https://placehold.co/400"
-            alt="Work 2"
-            class="w-full h-48 object-cover"
-          />
-          <div class="p-4 flex flex-col flex-grow">
-            <h3 class="text-lg font-semibold mb-2">Project 2</h3>
-            <p class="text-gray-600 text-sm mb-4 flex-grow">
-              Deskripsi singkat project 2. Menyampaikan value utama dari
-              aplikasi atau karya ini.
-            </p>
-            <button
-              class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-tr-lg rounded-bl-lg"
-            >
-              View Detail
-            </button>
-          </div>
-        </div>
-
-        <div
-          class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
-        >
-          <img
-            src="https://placehold.co/400"
-            alt="Work 3"
-            class="w-full h-48 object-cover"
-          />
-          <div class="p-4 flex flex-col flex-grow">
-            <h3 class="text-lg font-semibold mb-2">Project 3</h3>
-            <p class="text-gray-600 text-sm mb-4 flex-grow">
-              Deskripsi singkat project 3. Penjelasan singkat mengenai teknologi
-              yang digunakan.
-            </p>
-            <button
-              class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-tr-lg rounded-bl-lg"
-            >
-              View Detail
-            </button>
-          </div>
-        </div>
-
-        <div
-          class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
-        >
-          <img
-            src="https://placehold.co/400"
-            alt="Work 4"
-            class="w-full h-48 object-cover"
-          />
-          <div class="p-4 flex flex-col flex-grow">
-            <h3 class="text-lg font-semibold mb-2">Project 4</h3>
-            <p class="text-gray-600 text-sm mb-4 flex-grow">
-              Deskripsi singkat project 4. Bisa juga menyebutkan dampaknya atau
-              audience-nya.
-            </p>
-            <button
-              class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-tr-lg rounded-bl-lg"
-            >
-              View Detail
-            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- end my recent work -->
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 fade-in">
+            Keahlian
+          </h2>
+          <div class="w-24 h-1 bg-indigo-600 mx-auto fade-in"></div>
+        </div>
 
-    <!-- section contact -->
-    <section id="contact" class="w-screen mx-auto py-4 gradient-bottom">
-      <h1 class="w-full my-2 text-5xl font-bold text-center text-white">
-        Contact me
-      </h1>
-      <div class="mb-4">
-        <div
-          class="h-1 mx-auto bg-pink-500 w-2/3 md:w-1/6 opacity-75 my-0 py-0 rounded"
-        ></div>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="fade-in">
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+              <h3 class="text-2xl font-bold text-gray-900 mb-8">
+                Technical Skills
+              </h3>
+
+              <div class="space-y-6">
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold text-gray-700">React.js</span>
+                    <span class="text-indigo-600 font-semibold">90%</span>
+                  </div>
+                  <div class="bg-gray-200 rounded-full h-3">
+                    <div
+                      class="skill-bar bg-gradient-to-r from-indigo-500 to-purple-600 h-3 rounded-full"
+                      style="--width: 90%"
+                    ></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold text-gray-700"
+                      >Tailwind CSS</span
+                    >
+                    <span class="text-indigo-600 font-semibold">85%</span>
+                  </div>
+                  <div class="bg-gray-200 rounded-full h-3">
+                    <div
+                      class="skill-bar bg-gradient-to-r from-indigo-500 to-purple-600 h-3 rounded-full"
+                      style="--width: 85%"
+                    ></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold text-gray-700">Next.js</span>
+                    <span class="text-indigo-600 font-semibold">80%</span>
+                  </div>
+                  <div class="bg-gray-200 rounded-full h-3">
+                    <div
+                      class="skill-bar bg-gradient-to-r from-indigo-500 to-purple-600 h-3 rounded-full"
+                      style="--width: 80%"
+                    ></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold text-gray-700">Node.js</span>
+                    <span class="text-indigo-600 font-semibold">75%</span>
+                  </div>
+                  <div class="bg-gray-200 rounded-full h-3">
+                    <div
+                      class="skill-bar bg-gradient-to-r from-indigo-500 to-purple-600 h-3 rounded-full"
+                      style="--width: 75%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fade-in">
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+              <h3 class="text-2xl font-bold text-gray-900 mb-8">
+                Tools & Technologies
+              </h3>
+
+              <div class="grid grid-cols-3 gap-6 text-center">
+                <div
+                  class="p-4 bg-gray-50 rounded-xl hover:bg-indigo-50 transition-colors"
+                >
+                  <i class="fab fa-js-square text-4xl text-yellow-500 mb-2"></i>
+                  <div class="font-semibold text-gray-700">JavaScript</div>
+                </div>
+                <div
+                  class="p-4 bg-gray-50 rounded-xl hover:bg-indigo-50 transition-colors"
+                >
+                  <i class="fab fa-python text-4xl text-blue-500 mb-2"></i>
+                  <div class="font-semibold text-gray-700">Python</div>
+                </div>
+                <div
+                  class="p-4 bg-gray-50 rounded-xl hover:bg-indigo-50 transition-colors"
+                >
+                  <i class="fab fa-git-alt text-4xl text-orange-500 mb-2"></i>
+                  <div class="font-semibold text-gray-700">Git</div>
+                </div>
+                <div
+                  class="p-4 bg-gray-50 rounded-xl hover:bg-indigo-50 transition-colors"
+                >
+                  <i class="fab fa-docker text-4xl text-blue-600 mb-2"></i>
+
+                  <div class="font-semibold text-gray-700">Docker</div>
+                </div>
+                <div
+                  class="p-4 bg-gray-50 rounded-xl hover:bg-indigo-50 transition-colors"
+                >
+                  <i class="fas fa-database text-4xl text-green-500 mb-2"></i>
+                  <div class="font-semibold text-gray-700">MongoDB</div>
+                </div>
+                <div
+                  class="p-4 bg-gray-50 rounded-xl hover:bg-indigo-50 transition-colors"
+                >
+                  <i class="fab fa-aws text-4xl text-orange-600 mb-2"></i>
+                  <div class="font-semibold text-gray-700">AWS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div
-        class="container p-4 mb-6 w-full lg:w-1/2 shadow-lg rounded-lg bg-gray-200 mx-auto"
-      >
-        <form class="p-5 lg:p-10 text-center">
-          <h4 class="text-2xl font-semibold">Ingin menghubungi saya?</h4>
-          <p class="mt-1 mb-4 text-gray-600">Tolong kirimkan pesan.</p>
-          <div class="w-full mb-4 mt-8">
-            <label class="uppercase text-gray-600 text-xs font-bold"
-              >Nama lengkap</label
-            >
-            <input
-              type="text"
-              class="mt-2 px-3 py-3 placeholder-gray-500 text-gray-600 bg-white rounded text-sm shadow w-full"
-              placeholder="Nama Lengkap"
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 fade-in">
+            Portfolio
+          </h2>
+          <div class="w-24 h-1 bg-indigo-600 mx-auto fade-in"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="fade-in card-hover bg-white rounded-2xl shadow-lg overflow-hidden"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop"
+              class="w-full h-48 object-cover"
+              alt="Project 1"
             />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                E-Commerce Platform
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Platform e-commerce modern dengan fitur lengkap dan pengalaman
+                pengguna yang optimal.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full"
+                  >React</span
+                >
+                <span
+                  class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full"
+                  >Node.js</span
+                >
+                <span
+                  class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full"
+                  >MongoDB</span
+                >
+              </div>
+              <a
+                href="#"
+                class="text-indigo-600 hover:text-indigo-800 font-semibold"
+                >View Project →</a
+              >
+            </div>
           </div>
 
-          <div class="w-full mb-4 mt-4">
-            <label class="uppercase text-gray-600 text-xs font-bold"
-              >Email</label
-            >
-            <input
-              type="text"
-              class="mt-2 px-3 py-3 placeholder-gray-500 text-gray-600 bg-white rounded text-sm shadow w-full"
-              placeholder="Email"
+          <div
+            class="fade-in card-hover bg-white rounded-2xl shadow-lg overflow-hidden"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop"
+              class="w-full h-48 object-cover"
+              alt="Project 2"
             />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Data Analytics Dashboard
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Dashboard analitik data dengan visualisasi interaktif untuk
+                business intelligence.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full"
+                  >Python</span
+                >
+                <span
+                  class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full"
+                  >D3.js</span
+                >
+                <span
+                  class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full"
+                  >PostgreSQL</span
+                >
+              </div>
+              <a
+                href="#"
+                class="text-indigo-600 hover:text-indigo-800 font-semibold"
+                >View Project →</a
+              >
+            </div>
           </div>
 
-          <div class="w-full mb-4 mt-4">
-            <label class="uppercase text-gray-600 text-xs font-bold"
-              >Pesan</label
-            >
-            <textarea
-              rows="4"
-              cols="80"
-              class="mt-2 px-3 py-3 placeholder-gray-500 text-gray-600 bg-white rounded text-sm shadow w-full"
-              placeholder="Tuliskan pesan ..."
-            ></textarea>
+          <div
+            class="fade-in card-hover bg-white rounded-2xl shadow-lg overflow-hidden"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=400&h=250&fit=crop"
+              class="w-full h-48 object-cover"
+              alt="Project 3"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Mobile App UI/UX
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Desain antarmuka mobile app dengan fokus pada user experience
+                yang intuitif.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full"
+                  >React Native</span
+                >
+                <span
+                  class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full"
+                  >Figma</span
+                >
+                <span
+                  class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full"
+                  >Firebase</span
+                >
+              </div>
+              <a
+                href="#"
+                class="text-indigo-600 hover:text-indigo-800 font-semibold"
+                >View Project →</a
+              >
+            </div>
           </div>
-          <div class="mt-6">
-            <button
-              class="bg-indigo-700 text-white text-sm font-bold uppercase px-6 py-3 rounded shadow hover:bg-indigo-900 hover:shadow-lg"
-              type="button"
-            >
-              Kirim pesan
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </section>
-    <!-- end section contact me -->
 
-    <!-- section footer -->
-    <section class="w-screen mx-auto py-4 bg-white mt-8 mb-8">
-      <div class="text-center">
-        <a href="#" class="text-indigo-700 hover:text-indigo-900 p-2">
-          <i class="fa-2x fab fa-facebook"></i>
-        </a>
-        <a href="#" class="text-indigo-700 hover:text-indigo-900 p-2">
-          <i class="fa-2x fab fa-twitter"></i>
-        </a>
-        <a href="#" class="text-indigo-700 hover:text-indigo-900 p-2">
-          <i class="fa-2x fab fa-instagram"></i>
-        </a>
-        <a href="#" class="text-indigo-700 hover:text-indigo-900 p-2">
-          <i class="fa-2x fab fa-github"></i>
-        </a>
-        <a href="#" class="text-indigo-700 hover:text-indigo-900 p-2">
-          <i class="fa-2x fab fa-linkedin"></i>
-        </a>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 gradient-bg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 fade-in">
+            Hubungi Saya
+          </h2>
+          <div class="w-24 h-1 bg-white mx-auto fade-in"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div class="fade-in">
+            <h3 class="text-2xl font-bold text-white mb-6">
+              Mari Berkolaborasi!
+            </h3>
+            <p class="text-white opacity-90 mb-8 text-lg leading-relaxed">
+              Saya selalu terbuka untuk proyek-proyek menarik dan kolaborasi
+              yang menantang. Mari berdiskusi tentang bagaimana kita bisa
+              menciptakan sesuatu yang luar biasa bersama-sama.
+            </p>
+
+            <div class="space-y-4">
+              <div class="flex items-center text-white">
+                <i class="fas fa-envelope text-xl mr-4"></i>
+                <span>maula.ibrahim@email.com</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-phone text-xl mr-4"></i>
+                <span>+62 899-9999-999</span>
+              </div>
+              <div class="flex items-center text-white">
+                <i class="fas fa-map-marker-alt text-xl mr-4"></i>
+                <span>Jakarta, Indonesia</span>
+              </div>
+            </div>
+
+            <div class="flex space-x-4 mt-8">
+              <a
+                href="#"
+                class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-colors"
+              >
+                <i class="fab fa-linkedin text-white text-xl"></i>
+              </a>
+              <a
+                href="#"
+                class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-colors"
+              >
+                <i class="fab fa-github text-white text-xl"></i>
+              </a>
+              <a
+                href="#"
+                class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-colors"
+              >
+                <i class="fab fa-twitter text-white text-xl"></i>
+              </a>
+              <a
+                href="#"
+                class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-colors"
+              >
+                <i class="fab fa-instagram text-white text-xl"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="fade-in">
+            <form class="glass rounded-2xl p-8">
+              <div class="mb-6">
+                <label class="block text-white text-sm font-semibold mb-2"
+                  >Nama Lengkap</label
+                >
+                <input
+                  type="text"
+                  class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:border-opacity-50"
+                />
+              </div>
+              <div class="mb-6">
+                <label class="block text-white text-sm font-semibold mb-2"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:border-opacity-50"
+                />
+              </div>
+              <div class="mb-6">
+                <label class="block text-white text-sm font-semibold mb-2"
+                  >Subjek</label
+                >
+                <input
+                  type="text"
+                  class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:border-opacity-50"
+                />
+              </div>
+              <div class="mb-6">
+                <label class="block text-white text-sm font-semibold mb-2"
+                  >Pesan</label
+                >
+                <textarea
+                  rows="4"
+                  class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:border-opacity-50 resize-none"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-white text-indigo-600 py-3 px-6 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Kirim Pesan
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="text-center mt-4 text-gray-600">Design with Tailwindcss</div>
     </section>
-    <!-- end footer -->
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <p class="text-gray-400">
+            © 2025 Maula Ibrahim Syahwi. Made with using Tailwind CSS
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
   </body>
 </html>
