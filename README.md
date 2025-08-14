@@ -140,7 +140,6 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 📞 Contact
 
 Maula Ibrahim Syahwi
-- Email: maula.ibrahim@email.com
 - Instagram : @maulaibrahimsyah
 
 ## 🙏 Acknowledgments
